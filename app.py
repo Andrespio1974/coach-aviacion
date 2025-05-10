@@ -1,10 +1,10 @@
 import streamlit as st
-import openai
+from openai import OpenAI
 
-# CONFIGURA TU CLAVE API AQUÍ (esta no se muestra al usuario final)
-openai.api_key = st.secrets["OPENAI_API_KEY"]
+# Crear cliente de OpenAI con clave desde secrets
+client = OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
 
-# TU MODELO AJUSTADO
+# Modelo personalizado fine-tuned
 MODEL_ID = "ft:gpt-3.5-turbo-0125:tu-modelo-personalizado"
 
 st.set_page_config(page_title="Coach de Aviación", page_icon="🛬")
@@ -26,12 +26,12 @@ if prompt:
         st.markdown(prompt)
 
     with st.chat_message("assistant"):
-        response = openai.ChatCompletion.create(
+        response = client.chat.completions.create(
             model=MODEL_ID,
             messages=st.session_state.messages,
             temperature=0.7
         )
-        reply = response["choices"][0]["message"]["content"]
+        reply = response.choices[0].message.content
         st.markdown(reply)
 
     st.session_state.messages.append({"role": "assistant", "content": reply})
