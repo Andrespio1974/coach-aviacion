@@ -5,7 +5,7 @@ from openai import OpenAI
 client = OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
 
 # Modelo personalizado fine-tuned
-MODEL_ID = "ft:gpt-3.5-turbo-0125:tu-modelo-personalizado"
+MODEL_ID = "ft:gpt-3.5-turbo-0125:andres::BVjbGLdM"
 
 st.set_page_config(page_title="Coach de Aviación", page_icon="🛬")
 st.title("🛬 Coach de Competencias para Pilotos")
